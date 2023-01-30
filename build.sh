@@ -36,6 +36,5 @@ function build() {
 
 if [[ ${TASK} == "base" ]]; then
     VERSION=${2}
-    build_and_push ${VERSION} 7.3
     build_and_push ${VERSION} 7.4
 fi
