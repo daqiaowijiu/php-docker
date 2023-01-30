@@ -16,20 +16,20 @@ function build() {
     PHP_VERSION=${2}
 
     BASE_IMAGE_TAG=${PHP_VERSION}-c1-${VERSION}
-    BASE_IMAGE=hooklife/php-docker:base-${BASE_IMAGE_TAG}
+    BASE_IMAGE=zhaozhikai1994/php-docker:base-${BASE_IMAGE_TAG}
 
     
     docker build --build-arg COMPOSER_VERSION=1 --build-arg PHP_VERSION=${PHP_VERSION} --build-arg VERSION=${VERSION} -t ${BASE_IMAGE} -f base.Dockerfile .
     docker push ${BASE_IMAGE}
 
-    docker build --build-arg BASE_IMAGE=${BASE_IMAGE} -t  hooklife/php-docker:crontab-${BASE_IMAGE_TAG} -f crontab.Dockerfile .
-    docker push hooklife/php-docker:crontab-${BASE_IMAGE_TAG}
+    docker build --build-arg BASE_IMAGE=${BASE_IMAGE} -t  zhaozhikai1994/php-docker:crontab-${BASE_IMAGE_TAG} -f crontab.Dockerfile .
+    docker push zhaozhikai1994/php-docker:crontab-${BASE_IMAGE_TAG}
     
-    docker build --build-arg BASE_IMAGE=${BASE_IMAGE} -t  hooklife/php-docker:horizon-${BASE_IMAGE_TAG} -f horizon.Dockerfile .
-    docker push hooklife/php-docker:horizon-${BASE_IMAGE_TAG}
+    docker build --build-arg BASE_IMAGE=${BASE_IMAGE} -t  zhaozhikai1994/php-docker:horizon-${BASE_IMAGE_TAG} -f horizon.Dockerfile .
+    docker push zhaozhikai1994/php-docker:horizon-${BASE_IMAGE_TAG}
 
-    docker build --build-arg BASE_IMAGE=${BASE_IMAGE} -t  hooklife/php-docker:nginx-php-fpm-${BASE_IMAGE_TAG} -f nginx-php-fpm.Dockerfile .
-    docker push hooklife/php-docker:nginx-php-fpm-${BASE_IMAGE_TAG}
+    docker build --build-arg BASE_IMAGE=${BASE_IMAGE} -t  zhaozhikai1994/php-docker:nginx-php-fpm-${BASE_IMAGE_TAG} -f nginx-php-fpm.Dockerfile .
+    docker push zhaozhikai1994/php-docker:nginx-php-fpm-${BASE_IMAGE_TAG}
 }
 
 
