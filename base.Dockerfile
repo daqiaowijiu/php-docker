@@ -4,7 +4,7 @@ FROM alpine:3.11
 ARG ALPINE_VERSION
 ARG PHP_VERSION=7.4
 ARG S6_OVERLAY_VERSION=3.1.0.1
-ARG COMPOSER_VERSION=1
+ARG COMPOSER_VERSION=2
 
 ENV S6_OVERLAY_VERSION=${S6_OVERLAY_VERSION} \
     TIME_ZONE=Asia/Shanghai \
@@ -17,6 +17,7 @@ ADD https://php.hernandev.com/key/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rs
 ##
 # ---------- building ----------
 ##
+
 RUN set -ex; \
     sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
     && addgroup -g 82 -S www-data \
@@ -63,7 +64,7 @@ RUN set -ex; \
     php7-opcache \
     php7-fpm \
     nginx \
-    fcgi \
+    && chown -R www-data:www-data /var/lib/nginx  \
     # install composer
     && ln -sf /usr/bin/php7 /usr/bin/php \
     && curl -sS https://getcomposer.org/installer | php -- --${COMPOSER_VERSION} --install-dir=/usr/local/bin --filename=composer \
@@ -79,6 +80,5 @@ RUN set -ex; \
 
 COPY rootfs /
 
-RUN ["chmod", "+x", "/usr/sbin/entrypoint.sh"]
 
 ENTRYPOINT ["/sbin/tini", "--", "/usr/sbin/entrypoint.sh"]
