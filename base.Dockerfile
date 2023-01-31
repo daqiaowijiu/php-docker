@@ -79,5 +79,6 @@ RUN set -ex; \
 
 COPY rootfs /
 
+RUN ["chmod", "+x", "/usr/sbin/entrypoint.sh"]
 
 ENTRYPOINT ["/sbin/tini", "--", "/usr/sbin/entrypoint.sh"]
