@@ -64,6 +64,7 @@ RUN set -ex; \
     php7-opcache \
     php7-fpm \
     nginx \
+    fcgi\
     && chown -R www-data:www-data /var/lib/nginx  \
     # install composer
     && ln -sf /usr/bin/php7 /usr/bin/php \
@@ -80,5 +81,6 @@ RUN set -ex; \
 
 COPY rootfs /
 
+RUN ["chmod", "+x", "/usr/sbin/entrypoint.sh"]
 
 ENTRYPOINT ["/sbin/tini", "--", "/usr/sbin/entrypoint.sh"]
