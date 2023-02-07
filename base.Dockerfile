@@ -64,7 +64,6 @@ RUN set -ex; \
     php7-opcache \
     php7-fpm \
     nginx \
-    fcgi\
     && chown -R www-data:www-data /var/lib/nginx  \
     # install composer
     && ln -sf /usr/bin/php7 /usr/bin/php \
